@@ -1,0 +1,349 @@
+/* style.css — The Nightmare Room (readable fonts, horror vibe) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050000;
+  font-family: 'Roboto Mono', 'Poppins', monospace;
+  color: #d4d4d4;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ----- SCANLINES & VIGNETTE ----- */
+.scanlines {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.9) 0px,
+    rgba(255, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.9) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.35;
+  animation: scanMove 8s linear infinite;
+}
+@keyframes scanMove {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 100px; }
+}
+
+.vignette {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, transparent 30%, #050000 100%);
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.95;
+}
+
+.glitch-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 0, 0, 0.02);
+  pointer-events: none;
+  z-index: 95;
+  animation: glitchFlicker 4s infinite;
+}
+@keyframes glitchFlicker {
+  0%, 100% { opacity: 0.02; }
+  10% { opacity: 0.08; background: #1a0000; }
+  30% { opacity: 0.14; background: #2a0000; }
+  70% { opacity: 0.09; background: #0a0000; }
+  80% { opacity: 0.02; }
+}
+
+/* ----- MAIN CONTAINER ----- */
+.victim-container {
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px 8px;
+  background: rgba(5, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  border-left: 2px solid #2a0000;
+  border-right: 2px solid #2a0000;
+  box-shadow: 0 0 60px rgba(255, 0, 0, 0.15), inset 0 0 40px #000000;
+  position: relative;
+  z-index: 50;
+  animation: containerShake 8s infinite;
+}
+@keyframes containerShake {
+  0%, 100% { transform: translate(0, 0); }
+  2% { transform: translate(1px, -1px); }
+  4% { transform: translate(-1px, 1px); }
+  6% { transform: translate(0, 0); }
+  50% { transform: translate(0, 0); }
+  52% { transform: translate(-1px, 0); }
+  54% { transform: translate(1px, 0); }
+  56% { transform: translate(0, 0); }
+}
+
+/* ----- HEADER ----- */
+.nightmare-header {
+  text-align: center;
+  padding: 8px 0 12px;
+  border-bottom: 1px solid #3a0000;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.creep-title {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  color: #ff2b2b;
+  text-shadow: 0 0 12px #ff0000, 0 0 30px #8b0000;
+  animation: titlePulse 2.5s infinite alternate;
+  text-transform: uppercase;
+}
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 10px #ff0000, 0 0 24px #8b0000; opacity: 0.92; }
+  100% { text-shadow: 0 0 22px #ff0000, 0 0 55px #4a0000; opacity: 1; }
+}
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  color: #a10000;
+  text-transform: uppercase;
+}
+.signal-icon svg {
+  filter: drop-shadow(0 0 6px #ff0000);
+}
+
+/* ----- MESSAGE AREA ----- */
+.message-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 2px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #3a0000 #0a0000;
+}
+.message-area::-webkit-scrollbar { width: 4px; }
+.message-area::-webkit-scrollbar-track { background: #0a0000; }
+.message-area::-webkit-scrollbar-thumb { background: #3a0000; border-radius: 4px; }
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  color: #5a5a5a;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 40px 20px;
+  animation: emptyFlicker 3s infinite;
+}
+@keyframes emptyFlicker {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ----- DARE / MESSAGE BOX ----- */
+.message-box {
+  background: #0d0000;
+  border: 1px solid #3a0000;
+  border-left: 4px solid #ff0000;
+  padding: 16px 16px 14px;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.22), inset 0 0 20px #000000;
+  position: relative;
+  animation: fadeInMessage 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  will-change: opacity, transform;
+}
+@keyframes fadeInMessage {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(6px); }
+  60% { opacity: 1; transform: translateY(-2px) scale(1.01); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.message-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,0,0,0.02) 10px, rgba(255,0,0,0.02) 12px);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Monster name (dare dene wala) */
+.monster-name {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 3px;
+  color: #ff3333;
+  text-shadow: 0 0 10px #ff0000, 0 0 22px #8b0000;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #3a0000;
+  padding-bottom: 6px;
+}
+.monster-name svg {
+  filter: drop-shadow(0 0 6px #ff0000);
+  flex-shrink: 0;
+}
+
+/* Message text — readable */
+.message-text {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e0c8c8;
+  text-shadow: 0 0 6px #2a0000;
+  word-break: break-word;
+  padding-left: 12px;
+  border-left: 2px solid #3a0000;
+  margin-top: 4px;
+}
+.message-time {
+  display: block;
+  text-align: right;
+  font-size: 0.6rem;
+  color: #6b0000;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* ----- REPLY TRAP ----- */
+.reply-trap {
+  flex-shrink: 0;
+  margin-top: 6px;
+  padding: 10px 0 4px;
+  border-top: 1px solid #2a0000;
+}
+.reply-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  color: #8b0000;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  animation: labelGlow 3s infinite;
+}
+@keyframes labelGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; text-shadow: 0 0 10px #ff0000; }
+}
+.reply-input-row {
+  display: flex;
+  gap: 6px;
+  background: #0a0000;
+  border: 1px solid #2a0000;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: inset 0 0 20px #000000;
+}
+.reply-input-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #b30000;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  padding: 10px 8px;
+  letter-spacing: 1px;
+}
+.reply-input-row input::placeholder {
+  color: #3a0000;
+  font-style: italic;
+}
+.reply-input-row input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.reply-input-row button {
+  background: #1a0000;
+  border: 1px solid #3a0000;
+  border-radius: 4px;
+  padding: 0 14px;
+  cursor: not-allowed;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trap-note {
+  font-size: 0.58rem;
+  color: #4a0000;
+  text-align: center;
+  margin-top: 6px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: trapPulse 2s infinite;
+}
+@keyframes trapPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; color: #8b0000; }
+}
+
+/* ----- SHAKE ----- */
+.shake-hard {
+  animation: shakeIt 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shakeIt {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 480px) {
+  .victim-container {
+    padding: 8px 8px 4px;
+    border-left: none;
+    border-right: none;
+    max-width: 100%;
+  }
+  .creep-title { font-size: 1.15rem; letter-spacing: 2px; }
+  .message-box { padding: 12px 12px 10px; }
+  .monster-name { font-size: 0.95rem; letter-spacing: 2px; }
+  .message-text { font-size: 0.85rem; }
+  .reply-input-row input { font-size: 0.78rem; padding: 8px 6px; }
+  .reply-input-row button { padding: 0 10px; }
+  .reply-input-row button svg { width: 18px; height: 18px; }
+}
+@media (max-height: 600px) {
+  .creep-title { font-size: 1.05rem; }
+  .message-area { gap: 10px; }
+  .message-box { padding: 10px; }
+}

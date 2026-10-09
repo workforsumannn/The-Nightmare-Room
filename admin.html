@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Nightmare Room · Console</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .admin-container {
+      max-width: 560px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 24px 20px 30px;
+      background: #0a0000;
+      border: 1px solid #3a0000;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(255, 0, 0, 0.15), inset 0 0 60px #000000;
+      position: relative;
+      z-index: 200;
+    }
+    .admin-container h1 {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 4px;
+      color: #ff2b2b;
+      text-align: center;
+      text-shadow: 0 0 24px #ff0000, 0 0 50px #8b0000;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .admin-sub {
+      text-align: center;
+      color: #6b0000;
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      border-bottom: 1px solid #2a0000;
+      padding-bottom: 12px;
+    }
+    .admin-field { margin-bottom: 20px; }
+    .admin-field label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      color: #a10000;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .admin-field input,
+    .admin-field textarea {
+      width: 100%;
+      background: #0d0000;
+      border: 1px solid #3a0000;
+      border-radius: 4px;
+      padding: 13px 12px;
+      color: #e0c8c8;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.9rem;
+      outline: none;
+      transition: 0.25s;
+      box-shadow: inset 0 0 20px #000000;
+    }
+    .admin-field input:focus,
+    .admin-field textarea:focus {
+      border-color: #ff0000;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3), inset 0 0 20px #000000;
+    }
+    .admin-field textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+    .admin-field input::placeholder,
+    .admin-field textarea::placeholder { color: #3a0000; font-style: italic; }
+    .send-btn {
+      width: 100%;
+      padding: 15px;
+      background: #1a0000;
+      border: 1px solid #ff0000;
+      border-radius: 4px;
+      color: #ff2b2b;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+      margin-top: 10px;
+    }
+    .send-btn:hover {
+      background: #2a0000;
+      box-shadow: 0 0 40px #ff0000, inset 0 0 20px #000000;
+      color: #ffffff;
+    }
+    .send-btn:active { transform: scale(0.98); }
+    .admin-status {
+      margin-top: 18px;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      color: #8b0000;
+      text-align: center;
+      text-transform: uppercase;
+      min-height: 22px;
+      transition: 0.3s;
+    }
+    .admin-note {
+      font-size: 0.58rem;
+      color: #4a0000;
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .scanlines, .vignette, .glitch-overlay { opacity: 0.25; }
+    @media (max-width: 520px) {
+      .admin-container { margin: 10px; padding: 18px 14px 24px; }
+      .admin-container h1 { font-size: 1.2rem; letter-spacing: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+  <div class="glitch-overlay"></div>
+
+  <div class="admin-container">
+    <h1>The Nightmare Room</h1>
+    <div class="admin-sub">Console · Send Nightmares</div>
+
+    <div class="admin-field">
+      <label>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Monster Name
+      </label>
+      <input type="text" id="monsterName" placeholder="e.g. ZAGROTH" value="MALGROTH">
+    </div>
+
+    <div class="admin-field">
+      <label>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        Dare Message
+      </label>
+      <textarea id="monsterMessage" placeholder="Type the dare that will appear on the victim's screen..."></textarea>
+    </div>
+
+    <button class="send-btn" id="sendBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff0000"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      Send Nightmare
+    </button>
+
+    <div class="admin-status" id="adminStatus">>> AWAITING COMMAND</div>
+    <div class="admin-note">Double-click monster name to cycle entities</div>
+  </div>
+
+  <script src="admin-script.js"></script>
+</body>
+</html>

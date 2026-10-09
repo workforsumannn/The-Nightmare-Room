@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Nightmare Room</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+  <div class="glitch-overlay"></div>
+
+  <main class="victim-container" id="victimContainer">
+    <header class="nightmare-header">
+      <h1 class="creep-title">The Nightmare Room</h1>
+      <div class="status-bar">
+        <span class="signal-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </span>
+        <span class="status-text">Connected · Trap Active</span>
+        <span class="signal-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </span>
+      </div>
+    </header>
+
+    <!-- Dares yahan aayenge -->
+    <div class="message-area" id="messageArea">
+      <div class="empty-state" id="emptyState">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="#ff0000" opacity="0.6"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        <p>Awaiting transmission from the other side...</p>
+      </div>
+    </div>
+
+    <!-- Reply trap (always disabled) -->
+    <div class="reply-trap" id="replyTrap">
+      <div class="reply-label">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff0000"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+        <span>Reply to the darkness</span>
+      </div>
+      <div class="reply-input-row">
+        <input type="text" id="replyInput" placeholder="Type your last words..." autocomplete="off" disabled>
+        <button id="replyBtn" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff0000"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <p class="trap-note">You cannot escape. The Nightmare Room keeps you.</p>
+    </div>
+  </main>
+
+  <audio id="hellAudio" loop>
+    <source src="data:audio/wav;base64,UklGRlQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ4AAACAgICAf39/f39/f38=" type="audio/wav">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

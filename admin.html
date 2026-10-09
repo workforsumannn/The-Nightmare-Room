@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control - Nightmare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="admin-container">
+        <h1>ADMIN CONTROL ROOM</h1>
+        <p style="color: gray; margin-bottom: 20px;">Connected to: The Nightmare Room</p>
+        
+        <div id="log-display">
+            <div>> System Initialized...</div>
+            <div>> Waiting for victim connection...</div>
+        </div>
+
+        <div class="admin-controls">
+            <input type="text" id="admin-input" placeholder="Type message to victim...">
+            <button id="send-btn">SEND MESSAGE</button>
+        </div>
+        
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button class="sound-btn" onclick="triggerSound()">🔊 Play Scare Sound</button>
+            <button class="sound-btn" onclick="triggerGlitch()">⚡ Force Glitch</button>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
